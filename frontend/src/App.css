@@ -1,0 +1,6 @@
+.background {
+    background-image: url('./assests/bgImg.png');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+  }
