@@ -1,9 +1,10 @@
 import React from 'react';
 import '../App.css'; 
 import { Link } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 function Homepage() {
   return (
-    <div className='background'>
+    <div className='background  '>
       <div className='flex flex-col justify-center items-center h-96 px-4'>
         <h1 className='text-4xl font-bold mb-6 text-center'>Welcome To PlantPedia</h1>
         <div className='space-x-4'> 
