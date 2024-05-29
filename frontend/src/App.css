@@ -5,3 +5,10 @@
     height: 100vh;
   }
 
+  .about-background {
+    background-image: url('./assests/bgImg.png');
+    background-size: cover;
+    background-position: center;
+    height: auto;
+  }
+
