@@ -4,7 +4,7 @@ import NavImg from '../assests/logo.png';
 
 function Navbar() {
   return (
-    <nav className="bg-[#2A5146] text-white">
+    <nav className="bg-[#2A5146] text-white Poppins">
       <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center ">
@@ -12,6 +12,7 @@ function Navbar() {
             <Link to="/" className="font-semibold text-2xl">PlantPedia</Link>
           </div>
           <div className="flex items-center text-xl space-x-8">
+            <Link to="/plantdetails" className='hover:text-[#D0B17C]'>Explore Plants</Link>
             <Link to="/about" className="hover:text-[#D0B17C]">About</Link>
             <Link to="/contact" className="hover:text-[#D0B17C]">Contact</Link>
           </div>

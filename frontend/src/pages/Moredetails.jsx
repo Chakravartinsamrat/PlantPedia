@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import tomatoImage from '../assests/plantImages/tomato.jpg';
-import potatoImage from '../assests/plantImages/potato.jpg';
-import carrotImage from '../assests/plantImages/carrot.jpg';
-import broccoliImage from '../assests/plantImages/broccoli.jpg';
-import onionImage from '../assests/plantImages/onion.jpg';
-import eggplantImage from '../assests/plantImages/eggplant.jpg';
 
 function Moredetails() {
   const { id } = useParams();
@@ -24,6 +18,11 @@ function Moredetails() {
       })
       .then(data => {
         console.log('Plant details fetched:', data);
+        if (data.image) {
+          data.imageUrl = `http://localhost:8081/uploads/${data.image}`;
+        } else {
+          data.imageUrl = 'https://via.placeholder.com/150';
+        }
         setPlant(data);
         setLoading(false);
       })
@@ -34,19 +33,6 @@ function Moredetails() {
       });
   }, [id]);
 
-  const getImageUrl = (plantName) => {
-    const imageMap = {
-      Potato: potatoImage,
-      Tomato: tomatoImage,
-      Carrot: carrotImage,
-      Onion: onionImage,
-      Broccoli: broccoliImage,
-      Eggplant: eggplantImage,
-      // Add more mappings as needed
-    };
-    return imageMap[plantName] || 'https://via.placeholder.com/150';
-  };
-
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -56,10 +42,10 @@ function Moredetails() {
   }
 
   return (
-    <div className="p-6 max-w-4xl mx-auto bg-white rounded-lg shadow-md">
+    <div className="Poppins p-6 max-w-4xl mx-auto bg-white rounded-lg shadow-md">
       <h1 className="text-4xl font-bold mb-4">{plant.name}</h1>
       <img 
-        src={getImageUrl(plant.name)} 
+        src={plant.imageUrl} 
         alt={`Image of ${plant.name}`} 
         className="h-48 w-48 rounded-full mb-4 mx-auto" 
       />

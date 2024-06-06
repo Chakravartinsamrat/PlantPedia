@@ -6,6 +6,8 @@ import Plantdetails from './pages/Plantdetails';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Moredetails from './pages/Moredetails';
+import AddPlant from './pages/AddPlant';
+
 function App() {
   return (
     <Router>
@@ -15,7 +17,8 @@ function App() {
         <Route path="/plantdetails" element={<Plantdetails />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/moredetails/:id" element={<Moredetails/>} />
+        <Route path="/moredetails/:id" element={<Moredetails />} />
+        <Route path="/addplant" element={<AddPlant />} />
       </Routes>
     </Router>
   );
