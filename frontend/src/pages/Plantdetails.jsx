@@ -5,12 +5,9 @@ function Plantdetails() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    console.log('Fetching data...');
     fetch('http://localhost:8081/plantdetails')
       .then(res => res.json())
       .then(data => {
-        console.log('Data fetched:', data);
-        // Construct image URL for each plant
         const plantsWithImageUrls = data.map(plant => ({
           ...plant,
           imageUrl: plant.image ? `http://localhost:8081/uploads/${plant.image}` : 'https://via.placeholder.com/150'
@@ -46,7 +43,7 @@ function Plantdetails() {
                 <span className="block">Plant Name:</span>
                 <span className="hover:underline mr-2">{plant.name}</span>
                 <Link to={`/moredetails/${plant.id}`}>
-                  <button key={plant.id} className="mt-4 bg-green-700 hover:bg-green-800 text-white text-base font-bold py-2 px-4 rounded-full hover:shadow-md transition duration-300">
+                  <button className="mt-4 bg-green-700 hover:bg-green-800 text-white text-base font-bold py-2 px-4 rounded-full hover:shadow-md transition duration-300">
                     Explore More
                   </button>
                 </Link>

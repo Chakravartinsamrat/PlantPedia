@@ -41,13 +41,20 @@ app.get('/plantdetails', (req, res) => {
 
 app.get('/plantdetails/:id', (req, res) => {
     const { id } = req.params;
-    const sql = "SELECT * FROM plantdetails WHERE id = ?";
-    db.query(sql, [id], (err, data) => {
+    const sqlPlant = "SELECT * FROM plantdetails WHERE id = ?";
+    const sqlRetail = "SELECT * FROM retaildetails WHERE rid = ?"; 
+
+    db.query(sqlPlant, [id], (err, plantData) => {
         if (err) return res.json(err);
-        if (data.length === 0) return res.status(404).json({ message: "Plant not found" });
-        return res.json(data[0]);
+        if (plantData.length === 0) return res.status(404).json({ message: "Plant not found" });
+
+        db.query(sqlRetail, [id], (err, retailData) => {
+            if (err) return res.json(err);
+            return res.json({ plant: plantData[0], retail: retailData });
+        });
     });
 });
+
 
 app.post('/addplant', upload.single('image'), (req, res) => {
     const {
@@ -68,6 +75,18 @@ app.post('/addplant', upload.single('image'), (req, res) => {
     db.query(sql, values, (err, data) => {
         if (err) return res.json(err);
         return res.json("Plant has been added successfully");
+    });
+});
+// New endpoint to handle contact form submissions
+app.post('/contact', (req, res) => {
+    const { cname, email, message } = req.body;
+
+    const sql = "INSERT INTO contactdetails (cname, email, message) VALUES (?, ?, ?)";
+    const values = [cname, email, message];
+
+    db.query(sql, values, (err, data) => {
+        if (err) return res.status(500).json({ success: false, error: err });
+        return res.json({ success: true, message: "Contact details have been saved successfully" });
     });
 });
 
